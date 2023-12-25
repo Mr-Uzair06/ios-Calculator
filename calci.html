@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="calci.css">
+  <title>ios calci</title>
+</head>
+<body>
+
+  <section class="s1">
+    <div class="calculator">
+      <div class="display">
+        <input type="text" id="result" value="0" disabled>
+      </div>
+      <div class="buttons" onclick="handleButtonClick(event)">
+        <div class="row">
+          <button class="color" data-type="clear">AC</button>
+          <button class="color" data-type="toggleSign">+/-</button>
+          <button class="color" data-type="percentage">%</button>
+          <button class="c2" data-type="operator" data-value="/">÷</button>
+        </div>
+        <div class="row">
+          <button data-type="number">7</button>
+          <button data-type="number">8</button>
+          <button data-type="number">9</button>
+          <button class="c2" data-type="operator" data-value="*">x</button>
+        </div>
+        <div class="row">
+          <button data-type="number">4</button>
+          <button data-type="number">5</button>
+          <button data-type="number">6</button>
+          <button class="c2 c7" data-type="operator" data-value="-">-</button>
+        </div>
+        <div class="row">
+          <button data-type="number">1</button>
+          <button data-type="number">2</button>
+          <button data-type="number">3</button>
+          <button class="c2" data-type="operator" data-value="+">+</button>
+        </div>
+        <div class="row">
+          <button class="c3" data-type="number">0</button>
+          <button data-type="dot">.</button>
+          <button class="c2" data-type="equals">=</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    let currentInput = '';
+    let currentOperator = '';
+    let previousInput = '';
+    
+    function handleButtonClick(event) {
+      const button = event.target;
+      const buttonType = button.getAttribute('data-type');
+      const buttonValue = button.textContent;
+
+      switch (buttonType) {
+        case 'number':
+          handleNumber(buttonValue);
+          break;
+        case 'operator':
+          handleOperator(buttonValue);
+          break;
+        case 'dot':
+          handleDot();
+          break;
+        case 'clear':
+          clearCalculator();
+          break;
+        case 'toggleSign':
+          toggleSign();
+          break;
+        case 'percentage':
+          calculatePercentage();
+          break;
+        case 'equals':
+          calculateResult();
+          break;
+      }
+    }
+
+    function handleNumber(value) {
+      currentInput += value;
+      updateDisplay();
+    }
+
+    function handleOperator(value) {
+      if (currentInput !== '') {
+        previousInput = currentInput;
+        currentInput = '';
+        currentOperator = value;
+      }
+    }
+
+    function handleDot() {
+      if (!currentInput.includes('.')) {
+        currentInput += '.';
+        updateDisplay();
+      }
+    }
+
+    function clearCalculator() {
+      currentInput = '';
+      currentOperator = '';
+      previousInput = '';
+      updateDisplay();
+    }
+
+    function toggleSign() {
+      if (currentInput !== '') {
+        currentInput = (parseFloat(currentInput) * -1).toString();
+        updateDisplay();
+      }
+    }
+
+    function calculatePercentage() {
+      if (currentInput !== '') {
+        currentInput = (parseFloat(currentInput) / 100).toString();
+        updateDisplay();
+      }
+    }
+
+    function calculateResult() {
+      if (currentInput !== '' && previousInput !== '' && currentOperator !== '') {
+        switch (currentOperator) {
+          case '+':
+            currentInput = (parseFloat(previousInput) + parseFloat(currentInput)).toString();
+            break;
+          case '-':
+            currentInput = (parseFloat(previousInput) - parseFloat(currentInput)).toString();
+            break;
+          case '*':
+            currentInput = (parseFloat(previousInput) * parseFloat(currentInput)).toString();
+            break;
+          case '/':
+            currentInput = (parseFloat(previousInput) / parseFloat(currentInput)).toString();
+            break;
+        }
+
+        currentOperator = '';
+        previousInput = '';
+        updateDisplay();
+      }
+    }
+
+    function updateDisplay() {
+      document.getElementById('result').value = currentInput || '0';
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+body{
+    font-family: Arial, sans-serif;
+    background-image: url(ios-15-wwdc-2021.jpg);
+    background-size: cover;
+    background-position: center;
+    
+      
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+
+
+}
+
+.calculator{
+    background-color: black;
+    border-radius: 20px;
+    width: 320px;
+    padding:20px;
+    box-shadow: 0px 4px 10px ;
+
+}
+
+.display{
+
+    background-color: #413c3c;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: right;
+    margin-bottom: 10px;
+
+}
+.color{
+    background-color: #958f8f;
+}
+
+#result{
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    font-size: 50px;
+    color: white;
+    outline: none;
+    text-align: right;
+    
+}
+.buttons .row{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+
+}
+
+button{
+    background-color: rgb(55, 53, 52);
+    color: white;
+    border: none;
+    border-radius: 250px;
+    padding:20px;
+    font-size: 24px;
+    width: 23%;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #aaa7a7;
+}
+
+button:active {
+    background-color: #555;
+}
+
+.c2
+{
+    background-color: #f6921e;
+}
+
+.c3{
+    width: 158px;
+    text-align: left;
+}
+
+.c7{
+font-size: 28px;
+}
